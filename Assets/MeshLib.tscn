@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5u5bgqqgkt3u"]
+
+[ext_resource type="PackedScene" uid="uid://dg1djcf5bbiem" path="res://Assets/cube.glb" id="1_v2iok"]
+
+[node name="MeshLib" type="Node3D"]
+
+[node name="cube" parent="." instance=ExtResource("1_v2iok")]

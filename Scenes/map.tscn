@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://5ghbtv8barix"]
+
+[ext_resource type="PackedScene" uid="uid://dr56k3qmvkp16" path="res://Assets/test_map.glb" id="1_ci6au"]
+[ext_resource type="PackedScene" uid="uid://x71dvsc1lmfw" path="res://Scenes/player.tscn" id="2_26yhd"]
+[ext_resource type="Script" uid="uid://bl0rjpxac5jl4" path="res://addons/waterways_net/RiverManager.cs" id="3_q0mm3"]
+[ext_resource type="Texture2D" uid="uid://b85tlq8wcklbo" path="res://addons/waterways_net/Textures/water_normal_bump.png" id="4_np2xp"]
+[ext_resource type="Script" uid="uid://buvp2424nin2j" path="res://addons/waterways_net/Data/RiverShaderSettings.cs" id="5_w7jjh"]
+
+[sub_resource type="Resource" id="Resource_q0mm3"]
+script = ExtResource("5_w7jjh")
+MatShaderType = 1
+mat_albedo_color_first = Color(0.6, 0.7, 0.65, 1)
+mat_albedo_color_second = Color(0.25, 0.35, 0.35, 1)
+mat_albedo_depth = 10.0
+mat_albedo_depth_curve = 0.25
+mat_transparency_clarity = 10.0
+mat_transparency_depth_curve = 0.25
+mat_transparency_refraction = 0.05
+mat_normal_scale = 1.0
+mat_normal_bump_texture = ExtResource("4_np2xp")
+mat_flow_speed = 2.8350001346625
+mat_flow_base = 0.0
+mat_flow_steepness = 2.0
+mat_flow_distance = 1.0
+mat_flow_pressure = 1.0
+mat_flow_max = 4.0
+mat_flow_direction = Vector2(1, 1)
+mat_foam_color = Color(0.9, 0.9, 0.9, 1)
+mat_foam_amount = 2.0
+mat_foam_steepness = 2.0
+mat_foam_smoothness = 0.3
+mat_uv_scale = Vector3(1, 1, 1)
+mat_roughness = 0.2
+mat_edge_fade = 0.25
+LodLod0Distance = 50.0
+_selectedShader = 1
+
+[sub_resource type="Curve3D" id="Curve3D_np2xp"]
+resource_local_to_scene = true
+bake_interval = 0.05
+_data = {
+"points": PackedVector3Array(-0.7222676, -0.047371387, -0.93111134, 0.7222676, 0.047371387, 0.93111134, -0.7241826, -0.19326782, -3.365571, -0.35180116, 0.18130827, -1.1956224, 0.35180116, -0.18130827, 1.1956224, 0.4863298, -0.11580658, 2.1404982, 0.3942113, 0.002319336, -1.2778072, -0.3942113, -0.002319336, 1.2778072, 2.471497, -0.83361775, 9.767235, 0.14818716, 0.16176045, -1.3572245, -0.14818716, -0.16176045, 1.3572245, 2.5631905, -1.315864, 13.515791, -2.5871449, 0.25954056, -2.1491013, 2.5871449, -0.25954056, 2.1491013, -0.1577549, -1.4596229, 20.363737),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="Map" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.97778326, 0.20961857, 0, -0.20961857, 0.97778326, 0, 2.3466055, 0)
+light_color = Color(1, 0.8681627, 0.86303383, 1)
+
+[node name="map" parent="." instance=ExtResource("1_ci6au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8722191, 0, -0.12750912)
+
+[node name="RiverManager" type="Node3D" parent="map"]
+transform = Transform3D(0.60622436, 0, 0.7952936, 0, 1, 0, -0.7952936, 0, 0.60622436, -6.741984, 1.5770633, -4.886257)
+script = ExtResource("3_q0mm3")
+ShaderSettings = SubResource("Resource_q0mm3")
+PointWidths = Array[float]([2.7237887, 2.767118, 2.583786, 1.8497313, 1.052544])
+Curve = SubResource("Curve3D_np2xp")
+metadata/_custom_type_script = "uid://bl0rjpxac5jl4"
+
+[node name="Player" parent="." instance=ExtResource("2_26yhd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39282, 4.0277143, 0)

@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://x71dvsc1lmfw"]
+
+[ext_resource type="Script" uid="uid://dyq1hmho7p178" path="res://Scripts/CharacterController.cs" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://cdd1cd38puuv2" path="res://Scripts/HandTarget.cs" id="2_6t5aa"]
+[ext_resource type="Shader" uid="uid://dxnts8iswhgyw" path="res://Assets/wireframe.gdshader" id="2_cvnsp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6t5aa"]
+render_priority = 0
+shader = ExtResource("2_cvnsp")
+shader_parameter/modelColor = Color(0, 0, 0, 1)
+shader_parameter/wireframeColor = Color(0, 0, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/modelOpacity = 0.0
+shader_parameter/filtered = false
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_v0iea")
+
+[node name="Head" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6552061, 0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Head"]
+layers = 512
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Head/CSGCombiner3D"]
+radius = 0.36363956
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Head/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.29723826)
+size = Vector3(0.4380226, 0.05319214, 0.47509766)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14073169, -0.0003399849)
+cull_mask = 1048063
+
+[node name="HandTarget" type="Marker3D" parent="Head"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.798)
+script = ExtResource("2_6t5aa")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Head/HandTarget"]
+radius = 0.08397789
+material = SubResource("ShaderMaterial_6t5aa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_onrkg")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.22442627, 0)
+layers = 512
+radius = 0.40185547
+height = 1.2193604
