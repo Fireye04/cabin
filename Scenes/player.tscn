@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://x71dvsc1lmfw"]
+[gd_scene load_steps=7 format=3 uid="uid://x71dvsc1lmfw"]
 
 [ext_resource type="Script" uid="uid://dyq1hmho7p178" path="res://Scripts/CharacterController.cs" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://cdd1cd38puuv2" path="res://Scripts/HandTarget.cs" id="2_6t5aa"]
 [ext_resource type="Shader" uid="uid://dxnts8iswhgyw" path="res://Assets/wireframe.gdshader" id="2_cvnsp"]
+[ext_resource type="Script" uid="uid://bif6d3xm5hrpg" path="res://Scripts/PlacementCast.cs" id="4_vgqql"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6t5aa"]
 render_priority = 0
@@ -44,6 +45,12 @@ script = ExtResource("2_6t5aa")
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Head/HandTarget"]
 radius = 0.08397789
 material = SubResource("ShaderMaterial_6t5aa")
+
+[node name="PlacementCast" type="RayCast3D" parent="Head"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14908063, 0)
+collision_mask = 2
+script = ExtResource("4_vgqql")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_onrkg")
