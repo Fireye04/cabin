@@ -48,6 +48,7 @@ material = SubResource("ShaderMaterial_6t5aa")
 
 [node name="PlacementCast" type="RayCast3D" parent="Head"]
 unique_name_in_owner = true
+enabled = false
 target_position = Vector3(0, 0, -3)
 collision_mask = 2
 script = ExtResource("4_vgqql")

@@ -23,18 +23,24 @@ public partial class HandTarget : Marker3D {
 
     public Vector3I getGridLoc() {
         Vector3I pointerLoc = getRawGridLoc();
-        Vector3 cascade = placementCast.getNormalVector();
-        GD.Print(cascade);
+        (Vector3, Vector3, bool)cascade = placementCast.getNormalVector();
 
-        if (grid.GetCellItem(pointerLoc) == -1) {
-            return pointerLoc;
+        if (cascade.Item3) {
+            Vector3I raycastLoc = grid.LocalToMap(grid.ToLocal(cascade.Item2));
+
+            if (grid.GetCellItem(raycastLoc) == -1) {
+                return raycastLoc;
+            }
+            Vector3I cascadeInt =
+                new Vector3I(raycastLoc.X + (int)cascade.Item1.X,
+                             raycastLoc.Y + (int)cascade.Item1.Y,
+                             raycastLoc.Z + (int)cascade.Item1.Z);
+            return cascadeInt;
         }
+        return pointerLoc;
+
         // Something's there, adapt
         // TODO: raycast
-        Vector3I cascadeInt = new Vector3I(pointerLoc.X + (int)cascade.X,
-                                           pointerLoc.Y + (int)cascade.Y,
-                                           pointerLoc.Z + (int)cascade.Z);
-        return cascadeInt;
 
         // get local positive z of self (points to player)
         // convert to Global vector3
