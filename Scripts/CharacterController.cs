@@ -37,7 +37,7 @@ public partial class CharacterController : CharacterBody3D {
     }
 
     public override void _UnhandledInput(InputEvent @event) {
-        if (Input.IsMouseButtonPressed(MouseButton.Left)) {
+        if (Input.IsActionJustPressed("place")) {
             captureMouse();
             placeItem(0);
         }
