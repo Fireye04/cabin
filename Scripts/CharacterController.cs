@@ -15,7 +15,7 @@ public partial class CharacterController : CharacterBody3D {
     public float lookSpeed = 0.002f;
 
     [Export]
-    public Godot.Collections.Array<PackedScene> Items;
+    public buildObjects Items;
 
     public Vector3 focusedLoc;
 
@@ -36,7 +36,7 @@ public partial class CharacterController : CharacterBody3D {
 
     private void placeItem(int item) {
         Vector3 placeLoc = handTarget.getGridLoc();
-        Node3D target = (Node3D)Items[0].Instantiate();
+        Node3D target = (Node3D)Items.objectList[0].target.Instantiate();
         map.AddChild(target);
         target.Position = placeLoc;
     }
