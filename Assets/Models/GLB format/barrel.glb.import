@@ -40,7 +40,8 @@ materials/extract_path=""
 _subresources={
 "nodes": {
 "PATH:barrel": {
-"generate/physics": true
+"generate/physics": true,
+"primitive/position": Vector3(-50, 0, 0)
 }
 }
 }

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh4s0ximt21al"]
+
+[ext_resource type="PackedScene" uid="uid://c1l2nipfan7wn" path="res://Assets/Models/GLB format/barrel.glb" id="1_3w4xy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3w4xy"]
+
+[node name="barrel" type="Node3D"]
+
+[node name="barrel2" parent="." instance=ExtResource("1_3w4xy")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -0.45, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="barrel2"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="barrel2/StaticBody3D"]
+transform = Transform3D(1.3333334, 0, 0, 0, 1.3333334, 0, 0, 0, 1.3333334, 0, 0.6000001, 0)
+shape = SubResource("BoxShape3D_3w4xy")
