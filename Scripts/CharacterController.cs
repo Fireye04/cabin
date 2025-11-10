@@ -14,26 +14,31 @@ public partial class CharacterController : CharacterBody3D {
     [Export]
     public float lookSpeed = 0.002f;
 
-    public Vector3I focusedLoc;
+    [Export]
+    public Godot.Collections.Array<PackedScene> Items;
+
+    public Vector3 focusedLoc;
 
     public Node3D head;
     public HandTarget handTarget;
-    public GridMap grid;
+    public Node3D map;
 
     public override void _Ready() {
         head = GetNode<Node3D>("%Head");
         handTarget = GetNode<HandTarget>("%HandTarget");
         lookRotation.Y = Rotation.Y;
         lookRotation.X = head.Rotation.X;
-        focusedLoc = new Vector3I();
-
-        GameState.Instance.GridSet += (val) => setGrid(val);
+        focusedLoc = new Vector3();
+        GameState.Instance.MapSet += (val) => setMap(val);
     }
 
-    private void setGrid(GridMap g) { grid = g; }
+    public void setMap(Node3D m) { map = m; }
 
     private void placeItem(int item) {
-        grid.SetCellItem(handTarget.getGridLoc(), item);
+        Vector3 placeLoc = handTarget.getGridLoc();
+        Node3D target = (Node3D)Items[0].Instantiate();
+        map.AddChild(target);
+        target.Position = placeLoc;
     }
 
     public override void _UnhandledInput(InputEvent @event) {

@@ -2,39 +2,50 @@ using Godot;
 using System;
 
 public partial class HandTarget : Marker3D {
-    public GridMap grid;
     public PlacementCast placementCast;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready() {
         placementCast = GetNode<PlacementCast>("%PlacementCast");
-
-        GameState.Instance.GridSet += (val) => setGrid(val);
     }
-
-    private void setGrid(GridMap g) { grid = g; }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta) {}
 
-    public Vector3I getRawGridLoc() {
-        return grid.LocalToMap(grid.ToLocal(GlobalPosition));
+    public Vector3 getRawGridLoc() {
+        return GlobalPosition.Snapped(new Vector3(1, 1, 1));
     }
 
-    public Vector3I getGridLoc() {
-        Vector3I pointerLoc = getRawGridLoc();
+    public Vector3 getGridLoc() {
+        Vector3 pointerLoc = getRawGridLoc();
         (Vector3, Vector3, bool)cascade = placementCast.getNormalVector();
 
         if (cascade.Item3) {
-            Vector3I raycastLoc = grid.LocalToMap(grid.ToLocal(cascade.Item2));
-
-            if (grid.GetCellItem(raycastLoc) == -1) {
-                return raycastLoc;
+            Vector3 raycastLoc = cascade.Item2;
+            Vector3 normal = cascade.Item1;
+            if (normal.X > 0) {
+                normal.X -= 0.5f;
             }
-            Vector3I cascadeInt =
-                new Vector3I(raycastLoc.X + (int)cascade.Item1.X,
-                             raycastLoc.Y + (int)cascade.Item1.Y,
-                             raycastLoc.Z + (int)cascade.Item1.Z);
+            if (normal.Y > 0) {
+                normal.Y -= 0.5f;
+            }
+            if (normal.Z > 0) {
+                normal.Z -= 0.5f;
+            }
+            if (normal.X < 0) {
+                normal.X += 0.5f;
+            }
+            if (normal.Y < 0) {
+                normal.Y += 0.5f;
+            }
+            if (normal.Z < 0) {
+                normal.Z += 0.5f;
+            }
+
+            Vector3 cascadeInt =
+                new Vector3(raycastLoc.X + normal.X, raycastLoc.Y + normal.Y,
+                            raycastLoc.Z + normal.Z)
+                    .Snapped(new Vector3(1, 1, 1));
             return cascadeInt;
         }
         return pointerLoc;

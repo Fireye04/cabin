@@ -3,7 +3,7 @@ using System;
 
 public partial class GameState : Node {
     [Signal]
-    public delegate void GridSetEventHandler(GridMap grid);
+    public delegate void MapSetEventHandler(Node3D map);
 
     /*SINGLETON CODE*/
 
@@ -11,13 +11,13 @@ public partial class GameState : Node {
 
     public override void _Ready() { Instance = this; }
 
-    private GridMap _grid;
+    private Node3D _map;
 
-    public GridMap grid {
-        get { return _grid; }
+    public Node3D map {
+        get { return _map; }
         set {
-            _grid = value;
-            EmitSignal(SignalName.GridSet, value);
+            _map = value;
+            EmitSignal(SignalName.MapSet, value);
         }
     }
 }

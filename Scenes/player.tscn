@@ -25,7 +25,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6552061, 0)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Head"]
-layers = 513
+layers = 512
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Head/CSGCombiner3D"]
 radius = 0.36363956
@@ -51,7 +51,6 @@ collision_mask = 2
 script = ExtResource("4_vgqql")
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14073169, 2.8528404)
 cull_mask = 1048063
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -59,6 +58,6 @@ shape = SubResource("CapsuleShape3D_onrkg")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.22442627, 0)
-layers = 513
+layers = 512
 radius = 0.40185547
 height = 1.2193604
