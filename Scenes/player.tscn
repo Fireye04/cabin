@@ -15,6 +15,7 @@ shader_parameter/modelOpacity = 0.0
 shader_parameter/filtered = false
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
+radius = 0.4091797
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_v0iea")
@@ -24,7 +25,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6552061, 0)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Head"]
-layers = 512
+layers = 513
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Head/CSGCombiner3D"]
 radius = 0.36363956
@@ -32,10 +33,6 @@ radius = 0.36363956
 [node name="CSGBox3D" type="CSGBox3D" parent="Head/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.29723826)
 size = Vector3(0.4380226, 0.05319214, 0.47509766)
-
-[node name="Camera3D" type="Camera3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14073169, -0.0003399849)
-cull_mask = 1048063
 
 [node name="HandTarget" type="Marker3D" parent="Head"]
 unique_name_in_owner = true
@@ -53,11 +50,15 @@ target_position = Vector3(0, 0, -3)
 collision_mask = 2
 script = ExtResource("4_vgqql")
 
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14073169, 2.8528404)
+cull_mask = 1048063
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_onrkg")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.22442627, 0)
-layers = 512
+layers = 513
 radius = 0.40185547
 height = 1.2193604
